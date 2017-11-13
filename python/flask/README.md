@@ -2,7 +2,6 @@ This is a one line [Flask](http://flask.pocoo.org/) application.
 
 The example deploys it to [Digital Ocean](https://www.digitalocean.com/products/compute/) using [Ansible](http://docs.ansible.com/ansible/latest/index.html)
 
-
 ## project requirements
 
 -   `.python-version` file
@@ -24,6 +23,24 @@ The example deploys it to [Digital Ocean](https://www.digitalocean.com/products/
 -   `do_ssh_username`
 
      this key designates the username to login with.  default=root.
+     
+## testing the ansible with Vagrant
+
+When you make edits to the ansible, you can test it locally with Vagrant.
+
+-   Install the latest [Vagrant](https://www.vagrant.io/downloads.html)
+
+-   Bring up the vagrant (this will run ansible the first time)
+
+    ```sh
+    nublar/config_management/ansible$ vagrant up
+    ```
+
+-   Run ansible
+
+    ```sh
+    nublar/config_management/ansible$ vagrant provision
+    ```
 
 ## build the machine image
 
@@ -82,7 +99,7 @@ The example deploys it to [Digital Ocean](https://www.digitalocean.com/products/
     nublar/terraform$ terraform destroy
     ```
 
-## example project development
+## flask development
 -   Install [pyenv](https://github.com/pyenv/pyenv)
 
     Make sure you get your shell to init properly!
