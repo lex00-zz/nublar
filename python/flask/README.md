@@ -65,9 +65,41 @@ All the tools in the `nublar` folder will use the same variables file.
     nublar$ cp variables/nublar.json.example variables/nublar.json
     ```
 
--   `do_ssh_username` (default = root)
 
-     this key designates the username to login with.
+-   `app_repo_url`
+    -   python repository containing flask application
+-   `app_subfolder`
+    -   default=''.  If setup.py is in a subfolder, specify this here
+-   `app_description`
+    -   this will go into the system service script
+-   `app_name` nublar
+    -   app folders and service name
+-   `app_user` nublar
+    -   system user and group will both be this value
+-   `app_domain` notarealdomain.co
+    -   domain that nginx will answer to
+-   `app_module` nublar_example_python_flask
+    -   python module for uwsgi.ini
+-   `app_callable` app
+    -   Flask application object for uwsgi.ini
+-   `app_port` 80
+    -   service port
+-   `app_health_ep` /
+    -   Ansible will check this for a 200 return code as a final step
+-   `uwsgi_process_count` 10
+    -   number of uwsgi processes
+-   `do_template_image`
+    -   template name used by [Packer](https://www.packer.io/downloads.html) to create a snapshot (ubuntu-16-04-x64)
+-   `do_image`
+    -   snapshot id used by [Terraform](https://www.terraform.io/downloads.html)
+-   `do_ssh_keys`
+    -   ssh key ids from Digital Ocean account
+-   `do_region`
+    -   Digital Ocean region (default = nyc1)
+-   `do_size`
+    -   Droplet size (default = 512mb)
+-   `do_ssh_username`
+    -   (default = root)
 
 ## Step 3 - test the Ansible role with Vagrant
 
