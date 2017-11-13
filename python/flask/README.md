@@ -23,10 +23,10 @@ The example deploys it to [Digital Ocean](https://www.digitalocean.com/products/
 -   `do_ssh_username`
 
      this key designates the username to login with.  default=root.
-     
-## testing the ansible with Vagrant
 
-When you make edits to the ansible, you can test it locally with Vagrant.
+## testing the configuration management with Vagrant
+
+When you make edits to the Ansible, you can test it locally with Vagrant.
 
 -   Install the latest [Vagrant](https://www.vagrant.io/downloads.html)
 
@@ -58,7 +58,7 @@ When you make edits to the ansible, you can test it locally with Vagrant.
     --> digitalocean: A snapshot was created: 'nublar-15...' (ID: 29...) in regions ''
     ```
 
-## create the droplet
+## deploy the machine image to a new machine
 
 -   Initialize Terraform the first time:
 
@@ -91,7 +91,7 @@ When you make edits to the ansible, you can test it locally with Vagrant.
 
 -   The default ssh name is `root`.  Check packer/digitalocean.json to be sure.
 
-## destroy the droplet
+## destroy the new machine
 
 -   This will remove your droplet:
 
