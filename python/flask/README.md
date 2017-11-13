@@ -66,9 +66,13 @@ When you make edits to the Ansible, you can test it locally with Vagrant.
     infrastructure_management/terraform/digitalocean$ terraform init
     ```
 
--   Update the `do_image` key in `vars.tf` with your desired snapshot id.
+-   `variables/nublar.json`
 
--   Update the `do_ssh_keys` key in `vars.tf` with at least one of your ssh keys from your DO account.
+    -   `do_image` needs your desired snapshot id.
+
+    -   `do_ssh_keys` is a comma delimited list of ssh keys ids from your DO account.
+
+    -    [Tugboat](https://github.com/petems/tugboat) can help you lookup these ids easily.
 
 -   Try to plan with terraform
 
@@ -96,7 +100,7 @@ When you make edits to the Ansible, you can test it locally with Vagrant.
 -   This will remove your droplet:
 
     ```sh
-    nublar/terraform$ terraform destroy
+    nublar/terraform$ terraform destroy -var-file ../../../variables/nublar.json
     ```
 
 ## flask development
