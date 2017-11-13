@@ -13,10 +13,10 @@ This tutorial provides a local environment to orchestrate a production deploymen
 
 This repository is broken down into two parts:
 
--   1) A minimal [Flask](http://flask.pocoo.org/docs/0.12/) example
+-   A minimal [Flask](http://flask.pocoo.org/docs/0.12/) example
     -   Everything except for the `nublar` folder
--   2) Code to package and deploy the [Flask](http://flask.pocoo.org/docs/0.12/) example
--   -   The `nublar` folder only
+-   Code to package and deploy the [Flask](http://flask.pocoo.org/docs/0.12/) example
+    -   The `nublar` folder only
 
 ## Goals
 
