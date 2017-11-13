@@ -85,7 +85,7 @@ Follow these steps in the `nublar/config_management/ansible` folder:
     nublar/config_management/ansible$ vagrant up
     ```
 
--   Run ansible
+-   Run [Ansible](http://docs.ansible.com/ansible/latest/index.html)
 
     ```sh
     nublar/config_management/ansible$ vagrant provision
