@@ -17,15 +17,19 @@ The example deploys it to [Digital Ocean](https://www.digitalocean.com/products/
 
 -   Install the latest [Terraform](https://www.terraform.io/downloads.html)
 
-## build the machine image
+## variables file
 
--   `nublar/nublar.json`.
+-   Copy the example file to a new file
 
-    Set build parameters in this file
+    ```
+    nublar$ cp variables/nublar.json.example variables/nublar.json
+    ```
 
 -   `do_ssh_username`
 
      this key designates the username to login with.  default=root.
+
+## build the machine image
 
 -   Run packer to create a new snapshot:
 
