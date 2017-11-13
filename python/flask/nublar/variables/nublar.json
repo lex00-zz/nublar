@@ -1,0 +1,20 @@
+{
+  "app_repo_url": "https://github.com/lex00/nublar_examples",
+  "app_subfolder": "python/flask",
+  "app_description": "A nublar example in Flask",
+  "app_name": "nublar",
+  "app_user": "nublar",
+  "app_domain": "notarealdomain.com",
+  "app_module": "nublar_example_python_flask",
+  "app_callable": "app",
+  "app_port": "80",
+  "app_health_ep": "/",
+  "uwsgi_process_count": "10",
+  "app_name": "nublar",
+  "do_template_image": "ubuntu-16-04-x64",
+  "do_image": "29292785",
+  "do_ssh_keys": "15223302",
+  "do_region": "nyc1",
+  "do_size": "512mb",
+  "do_ssh_username": "root"
+}

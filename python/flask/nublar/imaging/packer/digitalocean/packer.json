@@ -1,0 +1,33 @@
+{
+  "variables": {
+    "ansible_path": "config_management/ansible",
+    "script_path": "imaging/scripts",
+    "vars_path": "variables"
+  },
+  "builders": [
+    {
+      "type": "digitalocean",
+      "image": "{{ user `do_template_image` }}",
+      "region": "{{ user `do_region` }}",
+      "size": "{{ user `do_size` }}",
+      "ssh_username": "{{ user `do_ssh_username` }}",
+      "snapshot_name": "{{ user `app_name` }}-{{timestamp}}"
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "script": "{{ user `script_path` }}/install_ansible.sh"
+    },
+    {
+      "type": "ansible-local",
+      "host_vars": "{{ user `vars_path` }}",
+      "playbook_dir": "{{ user `ansible_path` }}",
+      "playbook_paths": "{{ user `ansible_path` }}",
+      "role_paths": "{{ user `ansible_path` }}/roles",
+      "playbook_file": "{{ user `ansible_path` }}/nublar.yml",
+      "extra_arguments": [ "--extra-vars \"@host_vars/nublar.json\"" ]
+    }
+  ]
+}

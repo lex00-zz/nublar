@@ -1,0 +1,39 @@
+---
+
+- hosts: all
+  tasks:
+  - import_role:
+       name: nublar-ansible-flask
+    vars:
+      # python repository containing flask application
+      app_repo_url: '{{ app_repo_url }}'
+
+      # if your project is in a subfolder in the repo, specify this here, otherwise set blank
+      app_subfolder: '{{ app_subfolder }}'
+
+      # this will go into the system service script
+      app_description: '{{ app_description }}'
+
+      # app folders and service name
+      app_name: '{{ app_name }}'
+
+      # system user and group will both be this value
+      app_user: '{{ app_user }}'
+
+      # domain that nginx will answer to
+      app_domain: '{{ app_domain }}'
+
+      # python module for uwsgi.ini
+      app_module: '{{ app_module }}'
+
+      # python callable for uwsgi.ini
+      app_callable: '{{ app_callable }}'
+
+      # service port
+      app_port: '{{ app_port }}'
+
+      # health endpoint
+      app_health_ep: '{{ app_health_ep }}'
+
+      # number of uwsgi processes
+      uwsgi_process_count: '{{ uwsgi_process_count }}'

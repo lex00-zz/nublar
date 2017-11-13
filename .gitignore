@@ -1,0 +1,16 @@
+build
+dist
+*egg*
+*.pyc
+.vagrant
+*.retry
+*.log
+*.lock
+secrets.json
+secrets.tf
+*.pem
+tfplan
+.terraform
+*.tfstate
+*.backup
+*.info
