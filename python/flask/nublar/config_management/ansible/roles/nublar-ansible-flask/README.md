@@ -4,6 +4,12 @@ This role for Ansible deploys your Flask application on Ubuntu.
 
 It allows you to easily configure Nginx and Uwsgi.
 
+## project requirements
+
+-   `.python-version` file
+
+    Your repository needs this file to contain the version of python you are targeting.  The role will install that version of python using pyenv.
+
 ## example
 
 ```yml

@@ -2,17 +2,15 @@ This is a one line [Flask](http://flask.pocoo.org/) application.
 
 The example deploys it to [Digital Ocean](https://www.digitalocean.com/products/compute/) using [Ansible](http://docs.ansible.com/ansible/latest/index.html)
 
-## project requirements
-
--   `.python-version` file
-
-    Your repository needs this file to contain the version of python you are targeting.
+## getting started
 
 -   Install the latest [Packer](https://www.packer.io/downloads.html)
 
 -   Install the latest [Terraform](https://www.terraform.io/downloads.html)
 
-## variables file
+-   Install the latest [Vagrant](https://www.vagrant.io/downloads.html) and [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
+
+#### variables file
 
 -   Copy the example file to a new file
 
@@ -26,9 +24,7 @@ The example deploys it to [Digital Ocean](https://www.digitalocean.com/products/
 
 ## test the configuration management with Vagrant
 
-When you make edits to the Ansible, you can test it locally with Vagrant.
-
--   Install the latest [Vagrant](https://www.vagrant.io/downloads.html)
+When you make edits to Ansible, you can test it locally with Vagrant.
 
 -   Bring up the vagrant (this will run ansible the first time)
 
