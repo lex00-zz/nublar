@@ -160,9 +160,11 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
     nublar/terraform$ terraform destroy -var-file ../../../variables/nublar.json
     ```
 
-## Step 7 - do it again
+## Step 7 - do it all again, and again
 
-You should be able to repeat steps 4-6.
+-   Add a new endpoint to the Flask app
+-   Bump the version in setup.py
+-   Repeat steps 3-6
 
 # Conclusion
 
