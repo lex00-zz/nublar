@@ -69,7 +69,7 @@ All the tools in the `nublar` folder will use the same variables file.
 -   `app_repo_url`
     -   python repository containing flask application
 -   `app_subfolder`
-    -   default=''.  If setup.py is in a subfolder, specify this here
+    -   If setup.py is in a subfolder, specify this here (default = '')
 -   `app_description`
     -   this will go into the system service script
 -   `app_name`
@@ -89,7 +89,7 @@ All the tools in the `nublar` folder will use the same variables file.
 -   `uwsgi_process_count`
     -   number of uwsgi processes (default = 10)
 -   `do_template_image`
-    -   template name used by [Packer](https://www.packer.io/downloads.html) to create a snapshot (ubuntu-16-04-x64)
+    -   Digital Ocean image used by  [Packer](https://www.packer.io/downloads.html) (default = ubuntu-16-04-x64)
 -   `do_image`
     -   snapshot id used by [Terraform](https://www.terraform.io/downloads.html)
 -   `do_ssh_keys`
