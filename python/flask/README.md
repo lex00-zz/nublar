@@ -102,7 +102,7 @@ When you make edits to the Ansible, you can test it locally with Vagrant.
 ## flask development
 -   Install [pyenv](https://github.com/pyenv/pyenv)
 
-    Make sure you get your shell to init properly!
+    Read the docs, be sure your profile inits pyenv!
 
 -   Setup [pipenv](https://github.com/kennethreitz/pipenv) using the provided convenience script
 
