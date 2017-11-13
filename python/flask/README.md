@@ -18,10 +18,6 @@ This repository is broken down into two parts:
 -   2) Code to package and deploy the Flask example
 -   -   The `nublar` folder only
 
-This is a one line [Flask](http://flask.pocoo.org/) application.
-
-The example deploys it to [Digital Ocean](https://www.digitalocean.com/products/compute/) using [Ansible](http://docs.ansible.com/ansible/latest/index.html)
-
 ## Goals
 
 -   Deploy a Flask app to a local vm using [Vagrant](https://www.vagrant.io/downloads.html) and [Ansible](http://docs.ansible.com/ansible/latest/index.html)
