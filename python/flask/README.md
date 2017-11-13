@@ -72,22 +72,22 @@ All the tools in the `nublar` folder will use the same variables file.
     -   default=''.  If setup.py is in a subfolder, specify this here
 -   `app_description`
     -   this will go into the system service script
--   `app_name` nublar
-    -   app folders and service name
--   `app_user` nublar
-    -   system user and group will both be this value
--   `app_domain` notarealdomain.co
+-   `app_name`
+    -   app folders and service name (default = nublar)
+-   `app_user`
+    -   system user and group will both be this value (default = nublar)
+-   `app_domain`
     -   domain that nginx will answer to
--   `app_module` nublar_example_python_flask
+-   `app_module`
     -   python module for uwsgi.ini
--   `app_callable` app
+-   `app_callable`
     -   Flask application object for uwsgi.ini
--   `app_port` 80
-    -   service port
--   `app_health_ep` /
-    -   Ansible will check this for a 200 return code as a final step
--   `uwsgi_process_count` 10
-    -   number of uwsgi processes
+-   `app_port`
+    -   service port (default = 80)
+-   `app_health_ep`
+    -   Ansible will check this for a 200 return code as a final step (default = /)
+-   `uwsgi_process_count`
+    -   number of uwsgi processes (default = 10)
 -   `do_template_image`
     -   template name used by [Packer](https://www.packer.io/downloads.html) to create a snapshot (ubuntu-16-04-x64)
 -   `do_image`
