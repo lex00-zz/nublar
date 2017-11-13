@@ -109,3 +109,11 @@ When you make edits to the Ansible, you can test it locally with Vagrant.
     This is going to install a recent version of Python into your pyenv.
 
     `./pipenv_setup.sh`
+
+-   Start the pipenv shell
+
+    `pipenv shell`
+
+-   Run Flask from pipenv shell
+
+    `$ ./runserver.sh`
