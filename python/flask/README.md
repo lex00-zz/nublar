@@ -168,6 +168,6 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
 
 # Conclusion
 
-Congratulations, you are now equipped to deploy a Flask application repeatably to digital ocean.
+Congratulations, you are now equipped to deploy a Flask application repeatably to [Digital Ocean](https://www.digitalocean.com/products/compute/).
 
 Now is a great time to try editing the Ansible, Packer, and Terraform configuration to teach yourself a bit more about these tools.
