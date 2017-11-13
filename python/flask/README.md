@@ -23,7 +23,8 @@ This repository is broken down into two parts:
 -   Deploy a [Flask](http://flask.pocoo.org/docs/0.12/) app to a local vm using [Vagrant](https://www.vagrant.io/downloads.html) and [Ansible](http://docs.ansible.com/ansible/latest/index.html)
 -   Build a machine image using [Packer](https://www.packer.io/downloads.html) and [Ansible](http://docs.ansible.com/ansible/latest/index.html)
 -   Deploy the image to a [Digital Ocean](https://www.digitalocean.com/products/compute/) droplet with [Terraform](https://www.terraform.io/downloads.html)
--   Rinse and repeat
+-   Destroy the droplet
+-   Repeat
 
 ## Prerequisites
 
