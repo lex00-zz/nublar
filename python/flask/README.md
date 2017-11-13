@@ -9,18 +9,18 @@ Here are a few examples:
 -   [AWS ECS](https://aws.amazon.com/ecs/)
 -   [GKE](https://cloud.google.com/container-engine/)
 
-This tutorial provides a local environment to orchestrate a production deployment of your Flask application, giving you complete control over every step of the process.  All the code is ready to use, and ready for you to customize.
+This tutorial provides a local environment to orchestrate a production deployment of your [Flask](http://flask.pocoo.org/docs/0.12/) application, giving you complete control over every step of the process.  All the code is ready to use, and ready for you to customize.
 
 This repository is broken down into two parts:
 
--   1) A minimal Flask example
+-   1) A minimal [Flask](http://flask.pocoo.org/docs/0.12/) example
     -   Everything except for the `nublar` folder
--   2) Code to package and deploy the Flask example
+-   2) Code to package and deploy the [Flask](http://flask.pocoo.org/docs/0.12/) example
 -   -   The `nublar` folder only
 
 ## Goals
 
--   Deploy a Flask app to a local vm using [Vagrant](https://www.vagrant.io/downloads.html) and [Ansible](http://docs.ansible.com/ansible/latest/index.html)
+-   Deploy a [Flask](http://flask.pocoo.org/docs/0.12/) app to a local vm using [Vagrant](https://www.vagrant.io/downloads.html) and [Ansible](http://docs.ansible.com/ansible/latest/index.html)
 -   Build a machine image using [Packer](https://www.packer.io/downloads.html) and [Ansible](http://docs.ansible.com/ansible/latest/index.html)
 -   Deploy the image to a [Digital Ocean](https://www.digitalocean.com/products/compute/) droplet with [Terraform](https://www.terraform.io/downloads.html)
 -   Rinse and repeat
@@ -37,7 +37,7 @@ This repository is broken down into two parts:
 ## Step 1 - setup Flask development environment
 You can skip this step if you just want to see how the deploy works.
 
-If you would like to test any changes to the Flask code, perform the following steps.
+If you would like to test any changes to the [Flask](http://flask.pocoo.org/docs/0.12/) code, perform the following steps.
 
 -   Install [pyenv](https://github.com/pyenv/pyenv)
 
@@ -51,7 +51,7 @@ If you would like to test any changes to the Flask code, perform the following s
 
     `pipenv shell`
 
--   Run Flask from pipenv shell
+-   Run [Flask](http://flask.pocoo.org/docs/0.12/) from pipenv shell
 
     `$ ./runserver.sh`
 
@@ -71,15 +71,15 @@ All the tools in the `nublar` folder will use the same variables file.
 
 ## Step 3 - test the Ansible role with Vagrant
 
-This repository comes with an Ansible role called `nublar-ansible-flask`.  It has a separate [README](https://github.com/lex00/nublar/tree/master/python/flask/nublar/config_management/ansible/roles/nublar-ansible-flask).
+This repository comes with an [Ansible](http://docs.ansible.com/ansible/latest/index.html) role called `nublar-ansible-flask`.  It has a separate [README](https://github.com/lex00/nublar/tree/master/python/flask/nublar/config_management/ansible/roles/nublar-ansible-flask).
 
-The Flask app will be deployed using [Uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) and [Nginx](https://nginx.org/en/docs/).
+The [Flask](http://flask.pocoo.org/docs/0.12/) app will be deployed using [Uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) and [Nginx](https://nginx.org/en/docs/).
 
-There is a `Vagrantfile` in `nublar/config_management/ansible` which has the Ansible provisioner configured to execute the playbook `nublar.yml`, which will in turn execute the `nublar-ansible-flask` role.
+There is a `Vagrantfile` in `nublar/config_management/ansible` which has the [Ansible](http://docs.ansible.com/ansible/latest/index.html) provisioner configured to execute the playbook `nublar.yml`, which will in turn execute the `nublar-ansible-flask` role.
 
 Follow these steps in the `nublar/config_management/ansible` folder:
 
--   Bring up Vagrant (this will run ansible the first time)
+-   Bring up [Vagrant](https://www.vagrant.io/downloads.html) (this will run [Ansible](http://docs.ansible.com/ansible/latest/index.html) the first time)
 
     ```sh
     nublar/config_management/ansible$ vagrant up
@@ -93,11 +93,11 @@ Follow these steps in the `nublar/config_management/ansible` folder:
 
 ## Step 4 - build the machine image
 
-Packer will be used to provision a new droplet, install the app, and then take a snapshot which can be used in the next step.
+[Packer](https://www.packer.io/downloads.html) will be used to provision a new droplet, install the app, and then take a snapshot which can be used in the next step.
 
 Follow these steps in the `nublar` folder:
 
--   Run the Packer build, you will need your API token:
+-   Run the [Packer](https://www.packer.io/downloads.html) build, you will need your API token:
 
     ```sh
     nublar$ export DIGITALOCEAN_API_TOKEN=...
@@ -117,7 +117,7 @@ Now that we have a snapshot ID, we can use it to create a new droplet.
 
 Follow these steps in the `infrastructure_management/terraform/digitalocean` folder:
 
--   Initialize Terraform (first time only):
+-   Initialize [Terraform](https://www.terraform.io/downloads.html) (first time only):
 
     ```sh
     infrastructure_management/terraform/digitalocean$ terraform init
@@ -131,7 +131,7 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
 
     -    [Tugboat](https://github.com/petems/tugboat) can help you lookup these ids easily.
 
--   Try to plan with Terraform.  You will need your API token.
+-   Try to plan with [Terraform](https://www.terraform.io/downloads.html).  You will need your API token.
 
     ```sh
     $ export TF_VAR_DIGITALOCEAN_TOKEN=...
@@ -162,12 +162,12 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
 
 ## Step 7 - do it all again, and again
 
--   Add a new endpoint to the Flask app
+-   Add a new endpoint to the [Flask](http://flask.pocoo.org/docs/0.12/) app
 -   Bump the version in setup.py
 -   Repeat steps 3-6
 
 # Conclusion
 
-Congratulations, you are now equipped to deploy a Flask application repeatably to [Digital Ocean](https://www.digitalocean.com/products/compute/).
+Congratulations, you are now equipped to deploy a [Flask](http://flask.pocoo.org/docs/0.12/) application repeatably to [Digital Ocean](https://www.digitalocean.com/products/compute/).
 
-Now is a great time to try editing the Ansible, Packer, and Terraform configuration to teach yourself a bit more about these tools.
+Now is a great time to try editing the [Ansible](http://docs.ansible.com/ansible/latest/index.html), [Packer](https://www.packer.io/downloads.html), and [Terraform](https://www.terraform.io/downloads.html) configuration to teach yourself a bit more about these tools.
