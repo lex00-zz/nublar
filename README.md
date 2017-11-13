@@ -19,6 +19,6 @@ nublar (first-person singular present indicative nublo, past participle nublado)
 
 ## examples
 
--   python/flask
+-   [Python Flask](/python/flask)
 
     A Flask service, deployed to Digital Ocean
