@@ -24,7 +24,7 @@ The example deploys it to [Digital Ocean](https://www.digitalocean.com/products/
 
      this key designates the username to login with.  default=root.
 
-## testing the configuration management with Vagrant
+## test the configuration management with Vagrant
 
 When you make edits to the Ansible, you can test it locally with Vagrant.
 
