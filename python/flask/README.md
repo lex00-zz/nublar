@@ -152,7 +152,7 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
 
 -   The default ssh name is `root` (see variables file).  You should now be able to login with your DO ssh key.
 
-## Step 6 - destroy the new machine
+## Step 6 - destroy the droplet
 
 -   This will delete your droplet:
 
