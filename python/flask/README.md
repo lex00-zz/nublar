@@ -2,7 +2,10 @@ Nublar - Python Flask example
 
 ## Overview
 
-This is a one line Flask application to demonstrate deployment to Digital Ocean with Nublar.
+This is a one line [Flask](http://flask.pocoo.org/) application.
+
+The example deploys it to [Digital Ocean](https://www.digitalocean.com/products/compute/) using [Ansible](http://docs.ansible.com/ansible/latest/index.html)
+
 
 ## project requirements
 
