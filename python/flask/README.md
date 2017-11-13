@@ -89,7 +89,7 @@ When you make edits to Ansible, you can test it locally with Vagrant.
     infrastructure_management/terraform/digitalocean$ rm tfplan
     ```
 
--   The default ssh name is `root`.  Check packer/digitalocean.json to be sure.
+-   The default ssh name is `root` (see variables file).
 
 ## destroy the new machine
 
