@@ -32,8 +32,8 @@ This repository is broken down into two parts:
 -   Install  [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 -   Install [Packer](https://www.packer.io/downloads.html)
 -   Install [Terraform](https://www.terraform.io/downloads.html)
--   [Setup an SSH key in your Digital Ocean account](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-digitalocean-droplets)
--   [Setup an API key in your Digital Ocean account](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2)
+-   [Setup a SSH key in your Digital Ocean account](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-digitalocean-droplets)
+-   [Setup an API token in your Digital Ocean account](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2)
 
 ## Step 1 - setup Flask development environment
 You can skip this step if you just want to see how the deploy works.
@@ -183,14 +183,16 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
     infrastructure_management/terraform/digitalocean$ rm tfplan
     ```
 
--   The default ssh name is `root` (see variables file).  You should now be able to login with your DO ssh key.
+-   The default ssh name is `root` (see variables file).  You can now login with your DO ssh key.
+
+-   The app will now answer at the new droplet ip and port configured in `nublar.json`.
 
 ## Step 6 - destroy the droplet
 
 -   This will delete your droplet:
 
     ```sh
-    nublar/terraform$ terraform destroy -var-file ../../../variables/nublar.json
+    infrastructure_management/terraform/digitalocean$ terraform destroy -var-file ../../../variables/nublar.json
     ```
 
 ## Step 7 - do it all again, and again
