@@ -3,7 +3,7 @@
 - hosts: all
   tasks:
   - import_role:
-       name: nublar-ansible-flask
+       name: lex00.flask-uwsgi-nginx
     vars:
       # python repository containing flask application
       app_repo_url: '{{ app_repo_url }}'

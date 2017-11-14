@@ -78,6 +78,8 @@ Vagrant.configure("2") do |config|
     ansible.become = true
     ansible.extra_vars = "nublar/variables/nublar.json"
     ansible.config_file = "nublar/config_management/ansible/ansible.cfg"
+    ansible.galaxy_roles_path = "nublar/config_management/ansible/roles"
+    ansible.galaxy_role_file = "nublar/config_management/ansible/requirements.yml"
     ansible.playbook = "nublar/config_management/ansible/nublar.yml"
   end
 end

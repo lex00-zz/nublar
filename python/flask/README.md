@@ -102,13 +102,9 @@ All the tools in the `nublar` folder will use the same variables file.
 -   `do_ssh_username`
     -   (default = root)
 
-## Step 3 - test the Ansible role with Vagrant
+## Step 3 - test the Ansible Vagrant
 
-This repository comes with an [Ansible](http://docs.ansible.com/ansible/latest/index.html) role called `nublar-ansible-flask`.  It has a separate [README](https://github.com/lex00/nublar/tree/master/python/flask/nublar/config_management/ansible/roles/nublar-ansible-flask).
-
-The [Flask](http://flask.pocoo.org/docs/0.12/) app will be deployed using [Uwsgi](https://uwsgi-docs.readthedocs.io/en/latest/) and [Nginx](https://nginx.org/en/docs/).
-
-There is a `Vagrantfile` in `nublar/config_management/ansible` which has the [Ansible](http://docs.ansible.com/ansible/latest/index.html) provisioner configured to execute the playbook `nublar.yml`, which will in turn execute the `nublar-ansible-flask` role.
+There is a `Vagrantfile` in `nublar/config_management/ansible` which has the [Ansible](http://docs.ansible.com/ansible/latest/index.html) provisioner configured to execute the playbook `nublar.yml`, which will in turn execute the [flask-uwsgi-nginx](https://galaxy.ansible.com/lex00/flask-uwsgi-nginx/) role.
 
 Follow these steps in the `nublar/config_management/ansible` folder:
 
