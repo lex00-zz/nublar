@@ -183,9 +183,14 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
     infrastructure_management/terraform/digitalocean$ rm tfplan
     ```
 
--   The default ssh name is `root` (see variables file).  You can now login with your DO ssh key.
+-   The default ssh name is `root` (see variables file).  You can now login with your DO ssh private key.
+
+    -   `ssh -i ~/.ssh/private_key root@{droplet_ip_address}`
+
 
 -   The app will now answer at the new droplet ip and port configured in `nublar.json`.
+
+    -   `http://{droplet_ip_address}:{nublar_port}/`
 
 ## Step 6 - destroy the droplet
 
