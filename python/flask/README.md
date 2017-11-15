@@ -124,7 +124,7 @@ Follow these steps in the `nublar/config_management/ansible` folder:
 
 [Packer](https://www.packer.io/downloads.html) will be used to provision a new droplet, install the app, and then take a snapshot which can be used in the next step.
 
-`packer.json` is configured automatically install the  [flask-uwsgi-nginx](https://galaxy.ansible.com/lex00/flask-uwsgi-nginx/) role.
+`packer.json` is configured to automatically install the  [flask-uwsgi-nginx](https://galaxy.ansible.com/lex00/flask-uwsgi-nginx/) role.
 
 Follow these steps in the `nublar` folder:
 
