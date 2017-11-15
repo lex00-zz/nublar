@@ -146,8 +146,11 @@ Follow these steps in the `nublar` folder:
 
 Now that we have a snapshot ID, we can use it to create a new droplet.
 
+If you have a domain setup with Digital Ocean, you can use the [digitalocean_domain](https://www.terraform.io/docs/providers/do/r/domain.html) and [digitalocean_record](https://www.terraform.io/docs/providers/do/r/record.html) resources to point at the new droplet ip.  This is not covered here, although Nginx is ready to answer to the domain as configured with `app_domain`.
+
 Follow these steps in the `infrastructure_management/terraform/digitalocean` folder:
 
+#### Terraform setup
 -   Initialize [Terraform](https://www.terraform.io/downloads.html) (first time only):
 
     ```sh
@@ -156,12 +159,16 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
 
 -   Edit `variables/nublar.json`
 
-    -   `do_image` is your desired snapshot id.
+    -   `do_image`
+        -   set this to the new snapshot id
 
-    -   `do_ssh_keys` is a comma delimited list of ssh keys ids from your DO account.
+    -   `do_ssh_keys`
+        -   an ssh key id from your DO account
 
-    -    [Tugboat](https://github.com/petems/tugboat) can help you lookup these ids easily.
 
+[Tugboat](https://github.com/petems/tugboat) can help you lookup these ssh key and snapshot ids.
+
+#### Terraform plan
 -   Try to plan with [Terraform](https://www.terraform.io/downloads.html).  You will need your API token.
 
     ```sh
@@ -169,7 +176,8 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
     infrastructure_management/terraform/digitalocean$ terraform plan -var-file ../../../variables/nublar.json -out tfplan
     ```
 
--   If the plan looks ok, apply it
+#### Terraform apply
+-   If the plan output looks safe, apply it
 
     ```sh
     infrastructure_management/terraform/digitalocean$ terraform apply tfplan
@@ -181,16 +189,18 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
     infrastructure_management/terraform/digitalocean$ rm tfplan
     ```
 
+## Step 6 - login to your droplet
+
 -   The default ssh name is `root` (see variables file).  You can now login with your DO ssh private key.
 
-    -   `ssh -i ~/.ssh/private_key root@{droplet_ip_address}`
-
+    -   `ssh -i ~/.ssh/do_private_key {{ do_ssh_username }}@{droplet_ip_address}`
+    - 
 
 -   The app will now answer at the new droplet ip and port configured in `nublar.json`.
 
     -   `http://{droplet_ip_address}:{nublar_port}/`
 
-## Step 6 - destroy the droplet
+## Step 7 - destroy the droplet
 
 -   This will delete your droplet:
 
@@ -198,11 +208,11 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
     infrastructure_management/terraform/digitalocean$ terraform destroy -var-file ../../../variables/nublar.json
     ```
 
-## Step 7 - do it all again, and again
+## Step 8 - do it all again, and again
 
 -   Add a new endpoint to the [Flask](http://flask.pocoo.org/docs/0.12/) app
 -   Bump the version in setup.py
--   Repeat steps 3-6
+-   Repeat steps 3-7
 
 # Conclusion
 
