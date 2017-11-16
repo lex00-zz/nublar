@@ -191,14 +191,27 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
 
 ## Step 6 - login to your droplet
 
+-   Use Terraform to lookup the ip address
+
+    ```sh
+    infrastructure_management/terraform/digitalocean$ terraform show
+
+    ...
+    ipv4_address = 198.199...
+    ...
+    ```
+
 -   The default ssh name is `root` (see variables file).  You can now login with your DO ssh private key.
 
     -   `ssh -i ~/.ssh/do_private_key {{ do_ssh_username }}@{droplet_ip_address}`
-    - 
+
 
 -   The app will now answer at the new droplet ip and port configured in `nublar.json`.
 
     -   `http://{droplet_ip_address}:{nublar_port}/`
+
+
+-   A firewall has been configured to allow access from `22` and `{nublar_port}`
 
 ## Step 7 - destroy the droplet
 
