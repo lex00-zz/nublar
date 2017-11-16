@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+{% block body %}
+<img src="{{ url_for('static', filename='images/flask_logo.png') }}" />
+<h2>Python Jobs from the GitHub Jobs API</h2>
+{% for python_job in python_jobs %}
+<hr />
+<ul>
+  {% for key, value in python_job.items() %}
+    <li><strong>{{ key|safe }}:</strong> {{ value|safe }}</li>
+  {% endfor %}
+</ul>
+{% endfor %}
+{% endblock %}

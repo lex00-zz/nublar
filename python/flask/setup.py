@@ -8,7 +8,10 @@ setuptools.setup(name='nublar_example_python_flask',
       author_email='',
       license='MIT',
       packages=['nublar_example_python_flask'],
+      include_package_data=True,
+      zip_safe=False,
       install_requires=[
           'flask',
+          'requests'
       ],
 )
