@@ -52,6 +52,10 @@ If you would like to test any changes to the [Flask](http://flask.pocoo.org/docs
 
     `pipenv shell`
 
+-   Run the tests
+
+    `$ python setup.py test`
+
 -   Run [Flask](http://flask.pocoo.org/docs/0.12/) from pipenv shell
 
     `$ ./runserver.sh`

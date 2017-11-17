@@ -15,4 +15,4 @@ tfplan
 *.backup
 *.info
 nublar.json
-python/flask/nublar/config_management/ansible/roles
+.cache
