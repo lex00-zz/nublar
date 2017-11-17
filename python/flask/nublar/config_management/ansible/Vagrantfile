@@ -18,7 +18,7 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "ubuntu/trusty64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -82,4 +82,7 @@ Vagrant.configure("2") do |config|
     ansible.galaxy_role_file = "nublar/config_management/ansible/requirements.yml"
     ansible.playbook = "nublar/config_management/ansible/nublar.yml"
   end
+  config.vm.provision "shell", inline: <<-SHELL
+     rm -fr /vagrant/nublar/config_management/ansible/roles/*
+  SHELL
 end
