@@ -25,7 +25,6 @@
       "host_vars": "{{ user `vars_path` }}",
       "playbook_dir": "{{ user `ansible_path` }}",
       "playbook_paths": "{{ user `ansible_path` }}",
-      "role_paths": "{{ user `ansible_path` }}/roles",
       "playbook_file": "{{ user `ansible_path` }}/nublar.yml",
       "galaxy_file": "{{ user `ansible_path` }}/requirements.yml",
       "extra_arguments": [ "--extra-vars \"@host_vars/nublar.json\"" ]
