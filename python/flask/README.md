@@ -130,6 +130,10 @@ Follow these steps in the `nublar/config_management/ansible` folder:
 
 `packer.json` is configured to automatically install the  [flask-uwsgi-nginx](https://galaxy.ansible.com/lex00/flask-uwsgi-nginx/) role.
 
+WARNING: After testing with Vagrant, the galaxy role is  supposed to be cleaned up.  However, if it is present, Packer will try to upload it.  To clean it up:
+
+-   `rm -fr config_management/ansible/roles/*`
+
 Follow these steps in the `nublar` folder:
 
 -   Run the [Packer](https://www.packer.io/downloads.html) build, you will need your API token:
