@@ -94,7 +94,7 @@ All the tools in the `nublar` folder will use the same variables file.
 -   `uwsgi_process_count`
     -   number of uwsgi processes (default = 10)
 -   `do_template_image`
-    -   Digital Ocean image used by  [Packer](https://www.packer.io/downloads.html) (default = ubuntu-16-04-x64)
+    -   Digital Ocean image used by  [Packer](https://www.packer.io/downloads.html) (default = ubuntu-14-04-x64)
 -   `do_image`
     -   snapshot id used by [Terraform](https://www.terraform.io/downloads.html)
 -   `do_ssh_keys`
