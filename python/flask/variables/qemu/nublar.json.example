@@ -12,9 +12,6 @@
   "uwsgi_process_count": "10",
 
   "qemu_hostname": "flask-github-jobs",
-  "qemu_ssh_fullname": "ubuntu",
-  "qemu_ssh_username": "ubuntu",
-  "qemu_ssh_password": "ubuntu",
   "qemu_cpus": "1",
   "qemu_memory": "1024",
   "qemu_iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.5-server-amd64.iso",
