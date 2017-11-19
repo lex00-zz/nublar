@@ -2,5 +2,5 @@
 
 -   [Digital Ocean](README_digitalocean.md)
 
--   [QEMU](README_qemu.md) **UNDER CONSTRUCTION**
+-   [QEMU](README_qemu.md)
 
