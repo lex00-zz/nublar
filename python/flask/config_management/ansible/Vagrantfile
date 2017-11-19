@@ -3,6 +3,14 @@
 # this is a good start
 ####
 
+require 'json'
+
+nublar_vars = '../../variables/' + ENV['NUBLAR_VARS']
+vagrant_nublar_vars = 'variables/' + ENV['NUBLAR_VARS']
+if File.exists?(File.expand_path nublar_vars)
+    settings = JSON.parse(File.read(File.expand_path nublar_vars))
+end
+
 
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -29,7 +37,7 @@ Vagrant.configure("2") do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # NOTE: This will enable public access to the opened port
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: settings['app_port'], host: settings['app_port']
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine and only allow access
@@ -50,7 +58,7 @@ Vagrant.configure("2") do |config|
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
-  config.vm.synced_folder "../../../", "/vagrant"
+  config.vm.synced_folder "../../", "/vagrant"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -76,13 +84,13 @@ Vagrant.configure("2") do |config|
   config.vm.provision "ansible", type: "ansible_local" do |ansible|
     ansible.verbose = true
     ansible.become = true
-    ansible.extra_vars = "nublar/variables/nublar.json"
-    ansible.config_file = "nublar/config_management/ansible/ansible.cfg"
-    ansible.galaxy_roles_path = "nublar/config_management/ansible/roles"
-    ansible.galaxy_role_file = "nublar/config_management/ansible/requirements.yml"
-    ansible.playbook = "nublar/config_management/ansible/nublar.yml"
+    ansible.extra_vars = vagrant_nublar_vars
+    ansible.config_file = "config_management/ansible/ansible.cfg"
+    ansible.galaxy_roles_path = "config_management/ansible/roles"
+    ansible.galaxy_role_file = "config_management/ansible/requirements.yml"
+    ansible.playbook = "config_management/ansible/nublar.yml"
   end
   config.vm.provision "shell", inline: <<-SHELL
-     rm -fr /vagrant/nublar/config_management/ansible/roles/*
+     rm -fr /vagrant/config_management/ansible/roles/*
   SHELL
 end

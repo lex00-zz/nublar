@@ -16,3 +16,4 @@ tfplan
 *.info
 nublar.json
 .cache
+*cache*

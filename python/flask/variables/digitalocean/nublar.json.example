@@ -1,0 +1,20 @@
+{
+  "app_repo_url": "https://github.com/lex00/flask-github-jobs",
+  "app_subfolder": "",
+  "app_description": "A simple flask that lists jobs from the github jobs api ",
+  "app_name": "flask_github_jobs",
+  "app_user": "flask_github_jobs",
+  "app_domain": "notarealdomain.com",
+  "app_module": "flask_github_jobs",
+  "app_callable": "app",
+  "app_port": "3000",
+  "app_health_ep": "/health",
+  "uwsgi_process_count": "10",
+  "do_template_image": "ubuntu-14-04-x64",
+  "do_droplet_name": "flask-github-jobs",
+  "do_image": "",
+  "do_ssh_keys": "",
+  "do_region": "nyc1",
+  "do_size": "512mb",
+  "do_ssh_username": "root"
+}

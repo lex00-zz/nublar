@@ -1,22 +1,17 @@
 # nublar
 
-A collection of examples to deploy applications to the cloud using local ops tooling.
+There are many services that offer ways to deploy your git repository to the cloud.
 
-## project name
+Nublar is a collection of examples to orchestrate application deployment, giving you complete control over every step of the process.  All the code is ready to use, and ready for you to customize.
 
-[Wiktionary definition of nublar](https://en.wiktionary.org/wiki/nublar):
+## the word `nublar`
+
 ```
-Verb
-nublar (first-person singular present indicative nublo, past participle nublado)
 -   (intransitive) to become cloudy
 ```
 
-## overview
-
--   machine image creation with [Packer](https://www.packer.io/intro/index.html)
--   configuration management with [Ansible](https://www.ansible.com/configuration-management)
--   infrastructure management with [Terraform](https://www.terraform.io/intro/index.html)
-
 ## examples
 
--   [Python Flask](/python/flask)
+-   Digital Ocean
+
+    -   [How to deploy Flask apps repeatably to Digital Ocean with Packer, Ansible, and Terraform.](/python/flask)

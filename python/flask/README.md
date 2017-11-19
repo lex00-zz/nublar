@@ -2,26 +2,12 @@
 
 ## Introduction
 
-There are many ways to deploy your git repository to the cloud.  Most of them do all the orchestration for you behind the scenes, and this is often exactly what people want.
-
-Here are a few examples:
--   [Heroku](https://www.heroku.com/)
--   [AWS ECS](https://aws.amazon.com/ecs/)
--   [GKE](https://cloud.google.com/container-engine/)
-
-This tutorial provides a local environment to orchestrate a production deployment of your [Flask](http://flask.pocoo.org/docs/0.12/) application, giving you complete control over every step of the process.  All the code is ready to use, and ready for you to customize.
-
-This repository is broken down into two parts:
-
--   A minimal [Flask](http://flask.pocoo.org/docs/0.12/) example
-    -   Everything except for the `nublar` folder
--   Code to package and deploy the [Flask](http://flask.pocoo.org/docs/0.12/) example
-    -   The `nublar` folder only
+This tutorial provides everything one needs to deploy a [Flask](http://flask.pocoo.org/docs/0.12/) application to Digital Ocean.
 
 ## Goals
 
--   Deploy a [Flask](http://flask.pocoo.org/docs/0.12/) app to a local vm using [Vagrant](https://www.vagrant.io/downloads.html) and [Ansible](http://docs.ansible.com/ansible/latest/index.html)
--   Build a machine image using [Packer](https://www.packer.io/downloads.html) and [Ansible](http://docs.ansible.com/ansible/latest/index.html)
+-   Test [Ansible](http://docs.ansible.com/ansible/latest/index.html) with [Vagrant](https://www.vagrant.io/downloads.html)
+-   Build a machine image with [Packer](https://www.packer.io/downloads.html)
 -   Deploy the image to a [Digital Ocean](https://www.digitalocean.com/products/compute/) droplet with [Terraform](https://www.terraform.io/downloads.html)
 -   Destroy the droplet
 -   Repeat
@@ -35,41 +21,26 @@ This repository is broken down into two parts:
 -   [Setup a SSH key in your Digital Ocean account](https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-digitalocean-droplets)
 -   [Setup an API token in your Digital Ocean account](https://www.digitalocean.com/community/tutorials/how-to-use-the-digitalocean-api-v2)
 
-## Step 1 - setup Flask development environment
-You can skip this step if you just want to see how the deploy works.
+## Step 1 - Variables / Configuration
 
-If you would like to test any changes to the [Flask](http://flask.pocoo.org/docs/0.12/) code, perform the following steps.
+All the tools use the same variables file.
 
--   Install [pyenv](https://github.com/pyenv/pyenv)
+`NUBLAR_VARS`, an env var, is used to control the location of the variables file.
 
-    Read the docs, *be sure your profile inits pyenv*!
+### Step 1a - Create the variables file
+-   Set `NUBLAR_VARS`
 
--   Install [pipenv](https://github.com/kennethreitz/pipenv) using the provided convenience script
-
-    `./pipenv_setup.sh`
-
--   Start the pipenv shell
-
-    `pipenv shell`
-
--   Run the tests
-
-    `$ python setup.py test`
-
--   Run [Flask](http://flask.pocoo.org/docs/0.12/) from pipenv shell
-
-    `$ ./runserver.sh`
-
-## Step 2 - create the variables file
-
-All the tools in the `nublar` folder will use the same variables file.
+    ```sh
+    export NUBLAR_VARS=digitalocean/nublar.json
+    ```
 
 -   Copy the example file to a new file
 
     ```
-    nublar$ cp variables/nublar.json.example variables/nublar.json
+    cp variables/${NUBLAR_VARS}.example variables/${NUBLAR_VARS}
     ```
 
+### Step 1b - edit the variables file
 
 -   `app_repo_url`
     -   python repository containing flask application
@@ -88,13 +59,15 @@ All the tools in the `nublar` folder will use the same variables file.
 -   `app_callable`
     -   Flask application object for uwsgi.ini
 -   `app_port`
-    -   service port (default = 80)
+    -   service port (default = 3000)
 -   `app_health_ep`
     -   Ansible will check this for a 200 return code as a final step (default = /)
 -   `uwsgi_process_count`
     -   number of uwsgi processes (default = 10)
 -   `do_template_image`
     -   Digital Ocean image used by  [Packer](https://www.packer.io/downloads.html) (default = ubuntu-14-04-x64)
+-   `do_droplet_name`
+    -   hostname for droplet (no underscores allowed)
 -   `do_image`
     -   snapshot id used by [Terraform](https://www.terraform.io/downloads.html)
 -   `do_ssh_keys`
@@ -106,41 +79,60 @@ All the tools in the `nublar` folder will use the same variables file.
 -   `do_ssh_username`
     -   (default = root)
 
-## Step 3 - test Ansible in Vagrant
+## Step 2 - test Ansible with Vagrant
 
-There is a `Vagrantfile` in `nublar/config_management/ansible` which is configured to automatically install the [flask-uwsgi-nginx](https://galaxy.ansible.com/lex00/flask-uwsgi-nginx/) role.
+Vagrant is useful to make sure the Ansible playbook works before trying Packer.
 
-Follow these steps in the `nublar/config_management/ansible` folder:
+The [Vagrant Ansible provisioner](https://www.vagrantup.com/docs/provisioning/ansible.html) is configured to run the  [flask-uwsgi-nginx](https://galaxy.ansible.com/lex00/flask-uwsgi-nginx/) role.
+
+-   Change into the ansible folder
+
+    ```sh
+    cd config_management/ansible
+    ```
 
 -   Bring up [Vagrant](https://www.vagrant.io/downloads.html) (this will run [Ansible](http://docs.ansible.com/ansible/latest/index.html) the first time)
 
     ```sh
-    nublar/config_management/ansible$ vagrant up
+    vagrant up
     ```
 
 -   Run [Ansible](http://docs.ansible.com/ansible/latest/index.html)
 
     ```sh
-    nublar/config_management/ansible$ vagrant provision
+    vagrant provision
     ```
 
-## Step 4 - build the machine image
+    WARNING: Vagrant downloads the role from Ansible Galaxy and deletes it after provisioning.  If Packer is bombing in the next step, you can forcefully delete the downloaded role:
 
-[Packer](https://www.packer.io/downloads.html) will be used to provision a new droplet, install the app, and then take a snapshot which can be used in the next step.
+    -   `rm -fr config_management/ansible/roles/*`
 
-`packer.json` is configured to automatically install the  [flask-uwsgi-nginx](https://galaxy.ansible.com/lex00/flask-uwsgi-nginx/) role.
 
-WARNING: After testing with Vagrant, the galaxy role is  supposed to be cleaned up.  However, if it is present, Packer will try to upload it.  To clean it up:
+-   View the Flask app in your browser
 
--   `rm -fr config_management/ansible/roles/*`
+    `http://localhost:{app_port}/`
 
-Follow these steps in the `nublar` folder:
+## Step 3 - build the machine image with Packer
+
+[Packer](https://www.packer.io/downloads.html) is going to:
+
+-   provision a new droplet
+-   install the Flask app
+-   save a snapshot.
+
+[The Packer Ansible Local provisioner](https://www.packer.io/docs/provisioners/ansible-local.html) is configured to run the  [flask-uwsgi-nginx](https://galaxy.ansible.com/lex00/flask-uwsgi-nginx/) role.
+
+-   Change into the packer folder
+
+    ```sh
+    cd imaging/packer/digitalocean
+    ```
 
 -   Run the [Packer](https://www.packer.io/downloads.html) build, you will need your API token:
 
     ```sh
-    nublar$ export DIGITALOCEAN_API_TOKEN=...
-    nublar$ packer build -var-file=variables/nublar.json imaging/packer/digitalocean/packer.json
+    export DIGITALOCEAN_API_TOKEN=...
+    packer build -var-file=../../../variables/${NUBLAR_VARS} packer.json
     ```
 
 -   Get the new snapshot ID from the output (or your Digital Ocean web panel):
@@ -150,22 +142,26 @@ Follow these steps in the `nublar` folder:
     --> digitalocean: A snapshot was created: 'nublar-15...' (ID: 29...) in regions ''
     ```
 
-## Step 5 - deploy the machine image to a new droplet
+## Step 4 - deploy a droplet with Terraform
 
 Now that we have a snapshot ID, we can use it to create a new droplet.
 
 If you have a domain setup with Digital Ocean, you can use the [digitalocean_domain](https://www.terraform.io/docs/providers/do/r/domain.html) and [digitalocean_record](https://www.terraform.io/docs/providers/do/r/record.html) resources to point at the new droplet ip.  This is not covered here, although Nginx is ready to answer to the domain as configured with `app_domain`.
 
-Follow these steps in the `infrastructure_management/terraform/digitalocean` folder:
+-   Change into the terraform folder
+
+    ```sh
+    cd infrastructure_management/terraform/digitalocean
+    ```
 
 #### Terraform setup
 -   Initialize [Terraform](https://www.terraform.io/downloads.html) (first time only):
 
     ```sh
-    infrastructure_management/terraform/digitalocean$ terraform init
+    terraform init
     ```
 
--   Edit `variables/nublar.json`
+-   Edit `variables/digitalocean/nublar.json`
 
     -   `do_image`
         -   set this to the new snapshot id
@@ -180,29 +176,29 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
 -   Try to plan with [Terraform](https://www.terraform.io/downloads.html).  You will need your API token.
 
     ```sh
-    $ export TF_VAR_DIGITALOCEAN_TOKEN=...
-    infrastructure_management/terraform/digitalocean$ terraform plan -var-file ../../../variables/nublar.json -out tfplan
+    export TF_VAR_DIGITALOCEAN_TOKEN=...
+    terraform plan -var-file=../../../variables/${NUBLAR_VARS} -out tfplan
     ```
 
 #### Terraform apply
 -   If the plan output looks safe, apply it
 
     ```sh
-    infrastructure_management/terraform/digitalocean$ terraform apply tfplan
+    terraform apply tfplan
     ```
 
 -   Delete the old plan, *do not use it again*
 
     ```sh
-    infrastructure_management/terraform/digitalocean$ rm tfplan
+    rm tfplan
     ```
 
-## Step 6 - login to your droplet
+## Step 5 - login to your droplet
 
 -   Use Terraform to lookup the ip address
 
     ```sh
-    infrastructure_management/terraform/digitalocean$ terraform show
+    terraform show
 
     ...
     ipv4_address = 198.199...
@@ -221,19 +217,19 @@ Follow these steps in the `infrastructure_management/terraform/digitalocean` fol
 
 -   A firewall has been configured to allow access from anywhere to `22` and `nublar_port`.  This firewall also allows the droplet to reach out to the web and make dns lookups.
 
-## Step 7 - destroy the droplet
+## Step 6 - destroy the droplet
 
 -   This will delete your droplet:
 
     ```sh
-    infrastructure_management/terraform/digitalocean$ terraform destroy -var-file ../../../variables/nublar.json
+    terraform destroy -var-file=../../../variables/${NUBLAR_VARS}
     ```
 
 ## Step 8 - do it all again, and again
 
 -   Add a new endpoint to the [Flask](http://flask.pocoo.org/docs/0.12/) app
 -   Bump the version in setup.py
--   Repeat steps 3-7
+-   Repeat steps 2-6
 
 # Conclusion
 

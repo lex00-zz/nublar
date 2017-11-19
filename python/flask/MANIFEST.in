@@ -1,2 +1,0 @@
-recursive-include nublar_example_python_flask/templates *
-recursive-include nublar_example_python_flask/static *

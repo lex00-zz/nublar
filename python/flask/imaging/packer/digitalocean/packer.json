@@ -1,8 +1,8 @@
 {
   "variables": {
-    "ansible_path": "config_management/ansible",
-    "script_path": "imaging/scripts",
-    "vars_path": "variables"
+    "ansible_path": "../../../config_management/ansible",
+    "script_path": "../../scripts",
+    "vars_path": "../../../variables/digitalocean"
   },
   "builders": [
     {
