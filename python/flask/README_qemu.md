@@ -1,5 +1,3 @@
-# UNDER CONSTRUCTION - NOT YET WORKING
-
 # How to deploy Flask apps repeatably to QEMU with Packer, Ansible, and Terraform.
 
 ## Introduction
@@ -165,9 +163,11 @@ The [Vagrant Ansible provisioner](https://www.vagrantup.com/docs/provisioning/an
     vncviewer 127.0.0.1:5951
     ```
 
+# UNDER CONSTRUCTION BELOW HERE - NOT YET WORKING
+
 ## Step 4 - create an instance with Terraform
 
-Now that we have a snapshot ID, we can use it to create a new instance.
+Now that we have a qcow2 image, we can use it to create a new instance with QEMU.
 
 If you have a domain setup with QEMU, you can use the [qemu_domain](https://www.terraform.io/docs/providers/do/r/domain.html) and [qemu_record](https://www.terraform.io/docs/providers/do/r/record.html) resources to point at the new instance ip.  This is not covered here, although Nginx is ready to answer to the domain as configured with `app_domain`.
 
