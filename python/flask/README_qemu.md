@@ -16,12 +16,11 @@ This tutorial provides everything one needs to deploy a [Flask](http://flask.poc
 
 ## Prerequisites
 
+-   Install [QEMU](https://www.qemu.org/download/)
 -   Install [Vagrant](https://www.vagrant.io/downloads.html) > 2.0
 -   Install  [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 -   Install [Packer](https://www.packer.io/downloads.html)
 -   Install [Terraform](https://www.terraform.io/downloads.html)
--   [Setup a SSH key in your QEMU account](https://www.qemu.com/community/tutorials/how-to-use-ssh-keys-with-qemu-droplets)
--   [Setup an API token in your QEMU account](https://www.qemu.com/community/tutorials/how-to-use-the-qemu-api-v2)
 
 ## Step 1 - Variables / Configuration
 
@@ -66,20 +65,26 @@ All the tools use the same variables file.
     -   Ansible will check this for a 200 return code as a final step (default = /)
 -   `uwsgi_process_count`
     -   number of uwsgi processes (default = 10)
--   `do_template_image`
-    -   QEMU image used by  [Packer](https://www.packer.io/downloads.html) (default = ubuntu-14-04-x64)
--   `do_droplet_name`
-    -   hostname for droplet (no underscores allowed)
--   `do_image`
-    -   snapshot id used by [Terraform](https://www.terraform.io/downloads.html)
--   `do_ssh_keys`
-    -   ssh key ids from QEMU account
--   `do_region`
-    -   QEMU region (default = nyc1)
--   `do_size`
-    -   Droplet size (default = 512mb)
--   `do_ssh_username`
-    -   (default = root)
+-   `qemu_hostname`
+    -   hostname for vm
+-   `qemu_snapshot`
+    -   snapshot file? [Terraform](https://www.terraform.io/downloads.html)
+-   `qemu_ssh_username`
+    -   ssh username
+-   `qemu_ssh_fullname`
+    -   ssh fullname
+-   `qemu_ssh_password`
+    -   ssh password
+-   `qemu_cpus`
+    -   Number of cpus
+-   `qemu_memory`
+    -   RAM in MB
+-   `qemu_iso_url`
+    -   url to iso image
+-   `qemu_iso_checksum`
+    -   iso checksum value
+-   `qemu_iso_checksum_type`
+    -   iso checksum type (md5)
 
 ## Step 2 - test Ansible with Vagrant
 
@@ -118,9 +123,9 @@ The [Vagrant Ansible provisioner](https://www.vagrantup.com/docs/provisioning/an
 
 [Packer](https://www.packer.io/downloads.html) is going to:
 
--   provision a new droplet
--   install the Flask app
--   save a snapshot.
+-   create a new QEMU image
+-   provision it with Ansible, installing the Flask app
+-   save the new QEMU image
 
 [The Packer Ansible Local provisioner](https://www.packer.io/docs/provisioners/ansible-local.html) is configured to run the  [flask-uwsgi-nginx](https://galaxy.ansible.com/lex00/flask-uwsgi-nginx/) role.
 
@@ -130,18 +135,34 @@ The [Vagrant Ansible provisioner](https://www.vagrantup.com/docs/provisioning/an
     cd imaging/packer/qemu
     ```
 
--   Run the [Packer](https://www.packer.io/downloads.html) build, you will need your API token:
+-   Run the [Packer](https://www.packer.io/downloads.html) build:
 
     ```sh
-    export DIGITALOCEAN_API_TOKEN=...
     packer build -var-file=../../../variables/${NUBLAR_VARS} packer.json
     ```
 
--   Get the new snapshot ID from the output (or your QEMU web panel):
+-   Watch the install with VNC:
 
+    Before trying to connect, wait until Packer finishes typing the boot command.  If you interrupt it, Packer will not be able to finish.
+
+    ```sh
+    ==> qemu: Typing the boot command over VNC...
     ```
-    ==> Builds finished. The artifacts of successful builds are:
-    --> qemu: A snapshot was created: 'nublar-15...' (ID: 29...) in regions ''
+
+    The VNC port will be shown in the packer output:
+
+    ```sh
+    qemu: vnc://127.0.0.1:5951
+    ```
+
+    Use your favorite VNC client to connect, there is no password.
+
+    On OSX you can use tiger VNC:
+
+    ```sh
+    brew cask install xquartz
+    brew install tiger-vnc
+    vncviewer 127.0.0.1:5951
     ```
 
 ## Step 4 - deploy a droplet with Terraform
