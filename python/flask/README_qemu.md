@@ -10,8 +10,8 @@ This tutorial provides everything one needs to deploy a [Flask](http://flask.poc
 
 -   Test [Ansible](http://docs.ansible.com/ansible/latest/index.html) with [Vagrant](https://www.vagrant.io/downloads.html)
 -   Build a machine image with [Packer](https://www.packer.io/downloads.html)
--   Deploy the image to a [QEMU](https://www.qemu.com/products/compute/) droplet with [Terraform](https://www.terraform.io/downloads.html)
--   Destroy the droplet
+-   Deploy the image to a [QEMU](https://www.qemu.com/products/compute/) instance with [Terraform](https://www.terraform.io/downloads.html)
+-   Destroy the instance
 -   Repeat
 
 ## Prerequisites
@@ -165,11 +165,11 @@ The [Vagrant Ansible provisioner](https://www.vagrantup.com/docs/provisioning/an
     vncviewer 127.0.0.1:5951
     ```
 
-## Step 4 - deploy a droplet with Terraform
+## Step 4 - create an instance with Terraform
 
-Now that we have a snapshot ID, we can use it to create a new droplet.
+Now that we have a snapshot ID, we can use it to create a new instance.
 
-If you have a domain setup with QEMU, you can use the [qemu_domain](https://www.terraform.io/docs/providers/do/r/domain.html) and [qemu_record](https://www.terraform.io/docs/providers/do/r/record.html) resources to point at the new droplet ip.  This is not covered here, although Nginx is ready to answer to the domain as configured with `app_domain`.
+If you have a domain setup with QEMU, you can use the [qemu_domain](https://www.terraform.io/docs/providers/do/r/domain.html) and [qemu_record](https://www.terraform.io/docs/providers/do/r/record.html) resources to point at the new instance ip.  This is not covered here, although Nginx is ready to answer to the domain as configured with `app_domain`.
 
 -   Change into the terraform folder
 
@@ -216,7 +216,7 @@ If you have a domain setup with QEMU, you can use the [qemu_domain](https://www.
     rm tfplan
     ```
 
-## Step 5 - login to your droplet
+## Step 5 - login to your instance
 
 -   Use Terraform to lookup the ip address
 
@@ -230,19 +230,19 @@ If you have a domain setup with QEMU, you can use the [qemu_domain](https://www.
 
 -   The default ssh name is `root` (see variables file).  You can now login with your DO ssh private key.
 
-    -   `ssh -i ~/.ssh/do_private_key {{ do_ssh_username }}@{{ droplet_ip_address }}`
+    -   `ssh -i ~/.ssh/do_private_key {{ do_ssh_username }}@{{ instance_ip_address }}`
 
 
--   The app will now answer at the new droplet ip and port configured in `nublar.json`.
+-   The app will now answer at the new instance ip and port configured in `nublar.json`.
 
-    -   `http://{{ droplet_ip_address }}:{{ nublar_port }}/`
+    -   `http://{{ instance_ip_address }}:{{ nublar_port }}/`
 
 
--   A firewall has been configured to allow access from anywhere to `22` and `nublar_port`.  This firewall also allows the droplet to reach out to the web and make dns lookups.
+-   A firewall has been configured to allow access from anywhere to `22` and `nublar_port`.  This firewall also allows the instance to reach out to the web and make dns lookups.
 
-## Step 6 - destroy the droplet
+## Step 6 - destroy the instance
 
--   This will delete your droplet:
+-   This will delete your instance:
 
     ```sh
     terraform destroy -var-file=../../../variables/${NUBLAR_VARS}
