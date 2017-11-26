@@ -10,7 +10,7 @@
   "app_port": "3000",
   "app_health_ep": "/health",
   "uwsgi_process_count": "10",
-  "do_template_image": "ubuntu-14-04-x64",
+  "do_template_image": "ubuntu-17-04-x64",
   "do_droplet_name": "flask-github-jobs",
   "do_image": "",
   "do_ssh_keys": "",
