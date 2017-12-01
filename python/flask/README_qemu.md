@@ -1,15 +1,5 @@
 # How to deploy Flask apps repeatably to QEMU with Packer, Ansible, and Terraform.
 
-# UNDER CONSTRUCTION
-
-The packer image still has grub/boot issues
-
-```/boot/grub/i386-pc/normal.mod    not found```
-
-Potential fix:
-
-`d-i partman-efi/non_efi_system boolean true`
-
 ## Introduction
 
 This tutorial provides everything one needs to deploy a [Flask](http://flask.pocoo.org/docs/0.12/) application to QEMU.
