@@ -180,6 +180,8 @@ Test ssh (pw=ubuntu)
 
 ## Step 4 - create qemu instance with terraform
 
+After finishing this step, your new instance should be visible in `virt-manager`
+
 -   Initialize [Terraform](https://www.terraform.io/downloads.html) (first time only):
 
     ```sh
@@ -204,3 +206,48 @@ Test ssh (pw=ubuntu)
     ```sh
     rm tfplan
     ```
+
+## Step 5 - login to the instance
+
+-   Use Terraform to lookup the ip address
+
+    ```sh
+    terraform show
+
+    ...
+    network_interface.0.addresses.0 = 10.0.100.xxx
+    ...
+    ```
+
+-   The ssh username and password are `ubuntu`
+
+    -   `ssh ubuntu@{{ ip_address }}`
+
+
+-   The app will now answer at the new droplet ip and port configured in `nublar.json`.
+
+    -   `http://{{ ip_address }}:{{ nublar_port }}/`
+
+## Step 6 - destroy the instance
+
+After finishing this step, your new instance should be gone from `virt-manager`.
+
+If you get libvirt errors, you might need to manually delete the instance from `virt-manager` first, and then run terraform destroy.
+
+-   This will delete your instance:
+
+    ```sh
+    terraform destroy -var-file=../../../variables/${NUBLAR_VARS}
+    ```
+
+## Step 8 - do it all again, and again
+
+-   Add a new endpoint to the [Flask](http://flask.pocoo.org/docs/0.12/) app
+-   Bump the version in setup.py
+-   Repeat steps 2-6
+
+# Conclusion
+
+Congratulations, you are now equipped to deploy a [Flask](http://flask.pocoo.org/docs/0.12/) application repeatably to QEMU.
+
+Now is a great time to try editing the [Ansible](http://docs.ansible.com/ansible/latest/index.html), [Packer](https://www.packer.io/downloads.html), and [Terraform](https://www.terraform.io/downloads.html) configuration to teach yourself a bit more about these tools.
