@@ -1,3 +1,6 @@
+variable "qemu_memory" {}
+variable "qemu_cpus" {}
+
 resource "libvirt_network" "tf" {
    name = "tf"
    domain = "tf.local"
@@ -12,6 +15,8 @@ resource "libvirt_volume" "flask_github_jobs" {
 
 resource "libvirt_domain" "flask_github_jobs" {
   name = "flask_github_jobs"
+  memory = "${var.qemu_memory}"
+  vcpu = "${var.qemu_cpus}"
   network_interface {
       network_name = "tf"
   }

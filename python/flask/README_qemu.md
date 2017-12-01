@@ -232,11 +232,12 @@ After finishing this step, your new instance should be visible in `virt-manager`
 
 After finishing this step, your new instance should be gone from `virt-manager`.
 
-If you get libvirt errors, you might need to manually delete the instance from `virt-manager` first, and then run terraform destroy.
+Delete the instance first as shown below, then do a full delete to remove the network after.
 
 -   This will delete your instance:
 
     ```sh
+    terraform destroy -var-file=../../../variables/${NUBLAR_VARS} --target libvirt_domain.flask_github_jobs
     terraform destroy -var-file=../../../variables/${NUBLAR_VARS}
     ```
 
