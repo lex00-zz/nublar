@@ -225,7 +225,7 @@ If you have a domain setup with Digital Ocean, you can use the [digitalocean_dom
     terraform destroy -var-file=../../../variables/${NUBLAR_VARS}
     ```
 
-## Step 8 - do it all again, and again
+## Step 7 - do it all again, and again
 
 -   Add a new endpoint to the [Flask](http://flask.pocoo.org/docs/0.12/) app
 -   Bump the version in setup.py
