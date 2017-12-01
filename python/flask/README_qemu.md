@@ -23,6 +23,12 @@ The packer template comes from [kaorimatz/packer-templates](https://github.com/k
 -   Install  [Virtualbox](https://www.virtualbox.org/wiki/Downloads)
 -   Install [Packer](https://www.packer.io/downloads.html)
 -   Install [Terraform](https://www.terraform.io/downloads.html)
+-   Install libvirt packages (debian listed here)
+    -   libvirt-daemon
+    -   qemu-kvm
+    -   libvirt-clients
+    -   libvirt-daemon-system
+    -   virt-manager
 
 ## Step 1 - Variables / Configuration
 
