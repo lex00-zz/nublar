@@ -234,7 +234,7 @@ After finishing this step, your new instance should be gone from `virt-manager`.
 
 -   Add a new endpoint to the [Flask](http://flask.pocoo.org/docs/0.12/) app
 -   Bump the version in setup.py
--   Repeat steps 2-6
+-   Repeat steps 2-8
 
 # Conclusion
 
