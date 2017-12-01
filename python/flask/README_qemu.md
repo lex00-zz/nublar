@@ -90,7 +90,7 @@ All the tools use the same variables file.
 
 ## Step 2 - test Ansible with Vagrant
 
-Vagrant is useful to make sure the Ansible playbook works before trying Packer.
+Vagrant is useful to make sure the Ansible playbook works before trying Packer.  You can skip this step if you just want to get straight to packer.
 
 The [Vagrant Ansible provisioner](https://www.vagrantup.com/docs/provisioning/ansible.html) is configured to run the  [flask-uwsgi-nginx](https://galaxy.ansible.com/lex00/flask-uwsgi-nginx/) role.
 
