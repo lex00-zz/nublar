@@ -186,10 +186,9 @@ After finishing this step, your new instance should be visible in `virt-manager`
     terraform init
     ```
 
--   Try to plan with [Terraform](https://www.terraform.io/downloads.html).  You will need your API token.
+-   Try to plan with [Terraform](https://www.terraform.io/downloads.html).
 
     ```sh
-    export TF_VAR_DIGITALOCEAN_TOKEN=...
     terraform plan -var-file=../../../variables/${NUBLAR_VARS} -out tfplan
     ```
 
