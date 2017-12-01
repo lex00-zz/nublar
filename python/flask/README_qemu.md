@@ -216,7 +216,7 @@ After finishing this step, your new instance should be visible in `virt-manager`
     -   `ssh ubuntu@{{ ip_address }}`
 
 
--   The app will now answer at the new droplet ip and port configured in `nublar.json`.
+-   The app will now answer at the new ip and port configured in `nublar.json`.
 
     -   `http://{{ ip_address }}:{{ nublar_port }}/`
 
