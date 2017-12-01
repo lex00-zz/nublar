@@ -143,7 +143,7 @@ The [Vagrant Ansible provisioner](https://www.vagrantup.com/docs/provisioning/an
     PACKER_CACHE_DIR=~/.packer packer build -var-file=../../../variables/${NUBLAR_VARS} packer.json
     ```
 
-## Step 3 - test boot the machine image
+## Step 4 - test boot the machine image
 
 A script is provided to start the instance using `qemu`.
 
@@ -160,7 +160,7 @@ Test ssh (pw=ubuntu)
 
 `ssh -p22222 ubuntu@localhost`
 
-## Step 3 - setup terraform libvirt provider
+## Step 5 - setup terraform libvirt provider
 
 -   [dmacvicar/terraform-provider-libvirt](https://github.com/dmacvicar/terraform-provider-libvirt)
 
@@ -178,7 +178,7 @@ Test ssh (pw=ubuntu)
     cp ~/.go/bin/terraform-provider-libvirt terraform.d/plugins/linux_amd64/
     ```
 
-## Step 4 - create qemu instance with terraform
+## Step 6 - create qemu instance with terraform
 
 After finishing this step, your new instance should be visible in `virt-manager`
 
@@ -207,7 +207,7 @@ After finishing this step, your new instance should be visible in `virt-manager`
     rm tfplan
     ```
 
-## Step 5 - login to the instance
+## Step 7 - login to the instance
 
 -   Use Terraform to lookup the ip address
 
@@ -228,20 +228,17 @@ After finishing this step, your new instance should be visible in `virt-manager`
 
     -   `http://{{ ip_address }}:{{ nublar_port }}/`
 
-## Step 6 - destroy the instance
+## Step 8 - destroy the instance
 
 After finishing this step, your new instance should be gone from `virt-manager`.
-
-Delete the instance first as shown below, then do a full delete to remove the network after.
 
 -   This will delete your instance:
 
     ```sh
-    terraform destroy -var-file=../../../variables/${NUBLAR_VARS} --target libvirt_domain.flask_github_jobs
     terraform destroy -var-file=../../../variables/${NUBLAR_VARS}
     ```
 
-## Step 8 - do it all again, and again
+## Step 9 - do it all again, and again
 
 -   Add a new endpoint to the [Flask](http://flask.pocoo.org/docs/0.12/) app
 -   Bump the version in setup.py

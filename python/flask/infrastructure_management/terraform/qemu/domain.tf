@@ -17,9 +17,13 @@ resource "libvirt_domain" "flask_github_jobs" {
   name = "flask_github_jobs"
   memory = "${var.qemu_memory}"
   vcpu = "${var.qemu_cpus}"
+
+  depends_on = ["libvirt_volume.flask_github_jobs", "libvirt_network.tf"]
+
   network_interface {
       network_name = "tf"
   }
+
   disk {
        volume_id = "${libvirt_volume.flask_github_jobs.id}"
   }
