@@ -78,7 +78,7 @@ All the tools use the same variables file.
 -   `qemu_iso_checksum`
     -   iso checksum value
 -   `qemu_iso_checksum_type`
-    -   iso checksum type (md5)
+    -   iso checksum type (sha256)
 
 ## Step 2 - test Ansible with Vagrant
 
