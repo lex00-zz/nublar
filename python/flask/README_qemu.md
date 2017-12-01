@@ -14,10 +14,14 @@ Potential fix:
 
 This tutorial provides everything one needs to deploy a [Flask](http://flask.pocoo.org/docs/0.12/) application to QEMU.
 
+These instructions have only been tested on Debian.
+
+The packer template comes from [kaorimatz/packer-templates](https://github.com/kaorimatz/packer-templates).  The 17.04 packer file was pulled and modified to work with the nublar variables file.
+
 ## Goals
 
 -   Test [Ansible](http://docs.ansible.com/ansible/latest/index.html) with [Vagrant](https://www.vagrant.io/downloads.html)
--   Build a machine image with [Packer](https://www.packer.io/downloads.html)
+-   Build a QCOW image with [Packer](https://www.packer.io/downloads.html)
 -   Deploy the image to a [QEMU](https://www.qemu.com/products/compute/) instance with [Terraform](https://www.terraform.io/downloads.html)
 -   Destroy the instance
 -   Repeat
@@ -146,29 +150,22 @@ The [Vagrant Ansible provisioner](https://www.vagrantup.com/docs/provisioning/an
 -   Run the [Packer](https://www.packer.io/downloads.html) build:
 
     ```sh
-    packer build -var-file=../../../variables/${NUBLAR_VARS} packer.json
+    PACKER_CACHE_DIR=~/.packer packer build -var-file=../../../variables/${NUBLAR_VARS} packer.json
     ```
 
--   Watch the install with VNC:
+## Step 3 - test boot the machine image
 
-    Before trying to connect, wait until Packer finishes typing the boot command.  If you interrupt it, Packer will not be able to finish.
+A script is provided to start the instance using `qemu`.
 
-    ```sh
-    ==> qemu: Typing the boot command over VNC...
-    ```
+```sh
+cd imaging/packer/qemu
+./run.sh
+```
 
-    The VNC port will be shown in the packer output:
+Check your browser to see the app
 
-    ```sh
-    qemu: vnc://127.0.0.1:5951
-    ```
+`http://localhost:{{ app_port }}`
 
-    Use your favorite VNC client to connect, there is no password.
+Test ssh (pw=ubuntu)
 
-    On OSX you can use tiger VNC:
-
-    ```sh
-    brew cask install xquartz
-    brew install tiger-vnc
-    vncviewer 127.0.0.1:5951
-    ```
+`ssh -p22222 ubuntu@localhost`

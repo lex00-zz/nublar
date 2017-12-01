@@ -14,7 +14,7 @@
   "qemu_hostname": "flask-github-jobs",
   "qemu_cpus": "1",
   "qemu_memory": "1024",
-  "qemu_iso_url": "http://releases.ubuntu.com/14.04/ubuntu-14.04.5-server-amd64.iso",
-  "qemu_iso_checksum": "dd54dc8cfc2a655053d19813c2f9aa9f",
-  "qemu_iso_checksum_type": "md5"
+  "qemu_iso_url": "http://releases.ubuntu.com/17.04/ubuntu-17.04-server-amd64.iso",
+  "qemu_iso_checksum": "ca5d9a8438e2434b9a3ac2be67b5c5fa2c1f8e3e40b954519462935195464034",
+  "qemu_iso_checksum_type": "sha256"
 }
