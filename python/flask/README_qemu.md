@@ -159,3 +159,48 @@ Check your browser to see the app
 Test ssh (pw=ubuntu)
 
 `ssh -p22222 ubuntu@localhost`
+
+## Step 3 - setup terraform libvirt provider
+
+-   [dmacvicar/terraform-provider-libvirt](https://github.com/dmacvicar/terraform-provider-libvirt)
+
+    ```sh
+    go get github.com/dmacvicar/terraform-provider-libvirt
+    cd $GOPATH/src/github.com/dmacvicar/terraform-provider-libvirt/
+    go install
+    ```
+
+-   Add provider to terraform environment
+
+    ```sh
+    cd infrastructure_management/terraform/qemu
+    mkdir -p terraform.d/plugins/linux_amd64
+    cp ~/.go/bin/terraform-provider-libvirt terraform.d/plugins/linux_amd64/
+    ```
+
+## Step 4 - create qemu instance with terraform
+
+-   Initialize [Terraform](https://www.terraform.io/downloads.html) (first time only):
+
+    ```sh
+    terraform init
+    ```
+
+-   Try to plan with [Terraform](https://www.terraform.io/downloads.html).  You will need your API token.
+
+    ```sh
+    export TF_VAR_DIGITALOCEAN_TOKEN=...
+    terraform plan -var-file=../../../variables/${NUBLAR_VARS} -out tfplan
+    ```
+
+-   If the plan output looks safe, apply it
+
+    ```sh
+    terraform apply tfplan
+    ```
+
+-   Delete the old plan, *do not use it again*
+
+    ```sh
+    rm tfplan
+    ```
