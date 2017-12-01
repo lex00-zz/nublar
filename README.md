@@ -12,6 +12,6 @@ Nublar is a collection of examples to orchestrate application deployment, giving
 
 ## examples
 
--   Digital Ocean
+-   [Digital Ocean](/python/flask/README_digitalocean.md)
 
-    -   [How to deploy Flask apps repeatably to Digital Ocean with Packer, Ansible, and Terraform.](/python/flask)
+-   [QEMU](/python/flask/README_qemu.md)
